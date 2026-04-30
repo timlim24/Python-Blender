@@ -3,7 +3,7 @@ import os
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
-def select_objects():
+def select_all_objects():
     bpy.ops.object.select_all(action='SELECT')
 
-select_objects()
+select_all_objects()
