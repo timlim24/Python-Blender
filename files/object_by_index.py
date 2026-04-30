@@ -4,9 +4,6 @@ import math
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
-bpy.ops.object.select_all(action='SELECT')
-bpy.ops.object.delete()
-
 cube_loc = (0,0,1)
 cube_rot = (0, 0, math.radians(30))
 cylinder_loc = (0,0,3)
@@ -21,5 +18,6 @@ bpy.ops.mesh.primitive_monkey_add(location=monkey_loc, rotation=monkey_rot)
 objects = bpy.data.objects
 
 for obj in objects:
-    bpy.context.view_layer.objects.active = obj
-    bpy.ops.object.modifier_add(type='SUBSURF')
+    if obj.type == 'MESH':
+        bpy.context.view_layer.objects.active = obj
+        bpy.ops.object.modifier_add(type='SUBSURF')
