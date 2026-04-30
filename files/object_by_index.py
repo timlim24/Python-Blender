@@ -20,6 +20,6 @@ bpy.ops.mesh.primitive_monkey_add(location=monkey_loc, rotation=monkey_rot)
 
 objects = bpy.data.objects
 
-for i in range(len(objects)):
-    bpy.context.view_layer.objects.active = objects[i]
+for obj in objects:
+    bpy.context.view_layer.objects.active = obj
     bpy.ops.object.modifier_add(type='SUBSURF')
