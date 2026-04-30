@@ -18,3 +18,11 @@ monkey_rot = (math.radians(-21), 0, math.radians(150))
 bpy.ops.mesh.primitive_cube_add(location=cube_loc, rotation=cube_rot)
 bpy.ops.mesh.primitive_cylinder_add(location=cylinder_loc, rotation=cylinder_rot)
 bpy.ops.mesh.primitive_monkey_add(location=monkey_loc, rotation=monkey_rot)
+
+cube = bpy.data.objects['Cube']
+cylinder = bpy.data.objects['Cylinder']
+suzanne = bpy.data.objects['Suzanne']
+
+cube.select_set(True)
+cylinder.select_set(True)
+suzanne.select_set(True)
