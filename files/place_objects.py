@@ -4,6 +4,9 @@ import math
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete()
+
 cube_loc = (0,0,1)
 cube_rot = (0, 0, math.radians(30))
 cylinder_loc = (0,0,3)
