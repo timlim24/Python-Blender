@@ -24,5 +24,13 @@ cylinder = bpy.data.objects['Cylinder']
 suzanne = bpy.data.objects['Suzanne']
 
 cube.select_set(True)
+bpy.context.view_layer.objects.active = cube
+bpy.ops.object.modifier_add(type='SUBSURF')
+
 cylinder.select_set(True)
+bpy.context.view_layer.objects.active = cylinder
+bpy.ops.object.modifier_add(type='SUBSURF')
+
 suzanne.select_set(True)
+bpy.context.view_layer.objects.active = suzanne
+bpy.ops.object.modifier_add(type='SUBSURF')
