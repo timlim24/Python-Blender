@@ -3,6 +3,10 @@ import os
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
+def main():
+    deselect_all_objects()
+    select_all_object_type('LIGHT')
+
 def select_all_object_type(obj_type='MESH'):
     '''
     '''
@@ -17,5 +21,6 @@ def select_all_objects():
 def deselect_all_objects():
     bpy.ops.object.select_all(action='DESELECT')
 
-deselect_all_objects()
-select_all_object_type()
+
+if __name__ == '__main__':
+    main()
