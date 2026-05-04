@@ -8,19 +8,24 @@ os.system('cls' if os.name == 'nt' else 'clear')
 def main():
     select()
 
-def select(*object_names, type=None):
+def select(*object_names, types=None):
     '''
     This function is designed to select multiple
-    objects by their name and type.
+    objects by their name and types.
 
-    select(type='ALL') will select all objects
+    select() will deselect all objects
+    select(types='ALL') will select all objects
     '''
     # Check if objects exist
     number_of_objects = len(object_names)
     if number_of_objects == 0:
         print('No Objects')
     else:
-        if type == 'ALL':
+        if types is None or types == []:
+            for obj in all_objects():
+                obj.select_set(False)
+
+        elif types == 'ALL':
             for obj in all_objects():
                 obj.select_set(True)
 
