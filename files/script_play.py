@@ -29,6 +29,12 @@ def select(*object_names, types=None):
             for obj in all_objects():
                 obj.select_set(True)
 
+        elif types == 'MESH':
+            for obj in all_objects():
+                if obj.type == 'MESH':
+                    obj.select_set(True)
+                else:
+                    obj.select_set(False)
 
     # print(object_names)
     # for objs in object_names:
