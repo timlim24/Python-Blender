@@ -12,13 +12,18 @@ def select(*object_names, type=None):
     '''
     This function is designed to select multiple
     objects by their name and type.
+
+    select(type='ALL') will select all objects
     '''
     # Check if objects exist
     number_of_objects = len(object_names)
     if number_of_objects == 0:
         print('No Objects')
     else:
-        pass
+        if type == 'ALL':
+            for obj in all_objects():
+                obj.select_set(True)
+
 
     # print(object_names)
     # for objs in object_names:
