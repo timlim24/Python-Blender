@@ -6,9 +6,13 @@ os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def main():
-    select_by_name('Cube', 'Camera')
+    select()
 
-def select_by_name(*object_names):
+def select(*object_names, type=None):
+    '''
+    This function is designed to select multiple
+    objects by their name and type.
+    '''
     print(object_names)
     for objs in object_names:
         print(objs)
