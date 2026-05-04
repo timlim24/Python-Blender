@@ -8,7 +8,7 @@ os.system('cls' if os.name == 'nt' else 'clear')
 def main():
     select()
 
-def select(*object_names, types=None):
+def select(*object_names, **kwargs):
     '''
     This function is designed to select multiple
     objects by their name and types.
@@ -16,6 +16,8 @@ def select(*object_names, types=None):
     select() will deselect all objects
     select(types='ALL') will select all objects
     '''
+    types = kwargs.get('types')
+
     # Check if objects exist
     number_of_objects = len(object_names)
     if number_of_objects == 0:
@@ -29,9 +31,9 @@ def select(*object_names, types=None):
             for obj in all_objects():
                 obj.select_set(True)
 
-        elif types == 'MESH':
+        elif types is not None:
             for obj in all_objects():
-                if obj.type == 'MESH':
+                if obj.type in types:
                     obj.select_set(True)
                 else:
                     obj.select_set(False)
