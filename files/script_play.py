@@ -24,23 +24,21 @@ def select(*object_names, **kwargs):
     number_of_objects = len(object_names)
     if number_of_objects == 0:
         print('No Objects')
+
     else:
-        # Select ALL
-        if types is None or types == []:
-            for obj in all_objects():
-                obj.select_set(False)
-
-        elif types == 'ALL':
-            for obj in all_objects():
-                obj.select_set(True)
-
-        # Select by types
-        else:
-            for obj in all_objects():
-                if obj.type in types:
-                    obj.select_set(True)
-                else:
+        match types:
+            case None | []:
+                for obj in all_objects():
                     obj.select_set(False)
+            case 'ALL':
+                for obj in all_objects():
+                    obj.select_set(True)
+            case _:
+                for obj in all_objects():
+                    if obj.type in types:
+                        obj.select_set(True)
+                    else:
+                        obj.select_set(False)
 
         # Select objects by name
         if object_names is not None:
