@@ -3,6 +3,19 @@ import os
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
+
+def add_mesh(type, size=2, location = (0,0,0)):
+    match type:
+        case 'Plane':
+            bpy.ops.mesh.primitive_plane_add(size=size, location=location)
+        case 'Cube':
+            bpy.ops.mesh.primitive_cube_add(size=size, location=location)
+        case 'Monkey':
+            bpy.ops.mesh.primitive_monkey_add(size=size, location=location)
+        case _:
+            print('Incorrect Object Type')
+
+
 def select(*object_names, **kwargs):
     '''
     This function is designed to select multiple
