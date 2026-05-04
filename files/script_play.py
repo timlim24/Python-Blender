@@ -15,6 +15,8 @@ def select(*object_names, **kwargs):
 
     select() will deselect all objects
     select(types='ALL') will select all objects
+    select(types=['MESH', 'EMPTY']) will sellect all of that type.
+    select('name') will select objects by their name.
     '''
     types = kwargs.get('types')
 
@@ -23,6 +25,7 @@ def select(*object_names, **kwargs):
     if number_of_objects == 0:
         print('No Objects')
     else:
+        # Select ALL
         if types is None or types == []:
             for obj in all_objects():
                 obj.select_set(False)
@@ -31,17 +34,18 @@ def select(*object_names, **kwargs):
             for obj in all_objects():
                 obj.select_set(True)
 
-        elif types is not None:
+        # Select by types
+        else:
             for obj in all_objects():
                 if obj.type in types:
                     obj.select_set(True)
                 else:
                     obj.select_set(False)
 
-    # print(object_names)
-    # for objs in object_names:
-    #     print(objs)
-    #     all_objects()[objs].select_set(True)
+        # Select objects by name
+        if object_names is not None:
+            for objs in object_names:
+                all_objects()[objs].select_set(True)
 
 def all_objects():
     return bpy.data.objects
