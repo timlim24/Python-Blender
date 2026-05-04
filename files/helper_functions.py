@@ -3,16 +3,44 @@ import os
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
-def select_all_object_type(obj_type='MESH'):
-    objects = bpy.data.objects
-    for obj in objects:
-        if obj.type == obj_type:
-            obj.select_set(True)
+def select(*object_names, **kwargs):
+    '''
+    This function is designed to select multiple
+    objects by their name and types.
 
+    select() will deselect all objects
+    select(types='ALL') will select all objects
+    select(types=['MESH', 'EMPTY']) will sellect all of that type.
+    select('name') will select objects by their name.
+    '''
+    types = kwargs.get('types')
 
-def select_all_objects():
-    bpy.ops.object.select_all(action='SELECT')
+    # Check if objects exist
+    number_of_objects = len(object_names)
+    if number_of_objects == 0:
+        print('No Objects')
 
+    else:
+        match types:
+            case None | []:
+                for obj in all_objects():
+                    obj.select_set(False)
+            case 'ALL':
+                for obj in all_objects():
+                    obj.select_set(True)
+            case 'INVERT':
+                bpy.ops.object.select_all(action='INVERT')
+            case _:
+                for obj in all_objects():
+                    if obj.type in types:
+                        obj.select_set(True)
+                    else:
+                        obj.select_set(False)
 
-def deselect_all_objects():
-    bpy.ops.object.select_all(action='DESELECT')
+        # Select objects by name
+        if object_names is not None:
+            for objs in object_names:
+                all_objects()[objs].select_set(True)
+
+def all_objects():
+    return bpy.data.objects
