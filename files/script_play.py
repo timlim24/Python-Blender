@@ -11,8 +11,11 @@ def main():
     z = 5
     so = bpy.context.selected_objects
 
-    so[0].location = (x,y,z)
-    so[1].location = (x,y,z)
+    for i, obj in enumerate(so):
+        if i % 2 == 0:
+            obj.hide_viewport = True
+        else:
+            obj.hide_viewport = False
 
 if __name__ == '__main__':
     main()
