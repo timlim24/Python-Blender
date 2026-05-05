@@ -12,8 +12,8 @@ def main():
 
     # Object Parameters
     object_size = 1.8
-    object_type = 'Monkey'
-    number_of_objects = 12
+    object_type = 'Cube'
+    number_of_objects = 24
     x = y = z = 0
 
     # Circle Parameters
@@ -21,12 +21,12 @@ def main():
     angle_between_objects = 360 / number_of_objects
 
     number_of_layers = 10
-    distance_between_objects = 2
+    distance_between_layers = 2
 
     for layer in range(number_of_layers):
 
         for obj in range(number_of_objects):
-            placement_angle = obj * angle_between_objects + layer * 0.5 * angle_between_objects
+            placement_angle = obj * angle_between_objects
             angle = radians(placement_angle)
 
             x = cos(angle) * radius
@@ -38,7 +38,9 @@ def main():
 
             bpy.ops.transform.rotate(value=rot_angle, orient_axis='Z')
 
-        z += distance_between_objects
+            z += distance_between_layers / number_of_objects
+
+#        z += distance_between_layers
 
 if __name__ == '__main__':
     main()
