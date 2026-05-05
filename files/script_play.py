@@ -14,7 +14,7 @@ def main():
     # Object Parameters
     object_type = 'Cube'
     object_size = 1
-    number_of_objects = 100
+    number_of_objects = 80
     x = y = z = 0
     min_scale = 0.5
     max_scale = 2
@@ -24,9 +24,11 @@ def main():
     vol_y = 20
     vol_z = 5
 
+    upper_limit_of_objects = (vol_x * vol_y * vol_z) / (object_size * min_scale) / 20
+
     objects = []
 
-    for obj in range(number_of_objects):
+    while len(objects) < number_of_objects and len(objects) < upper_limit_of_objects:
 
         scale = random.uniform(min_scale, max_scale)
 
