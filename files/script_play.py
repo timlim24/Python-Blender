@@ -24,6 +24,8 @@ def main():
     vol_y = 20
     vol_z = 5
 
+    objects = []
+
     for obj in range(number_of_objects):
 
         scale = random.uniform(min_scale, max_scale)
@@ -36,12 +38,33 @@ def main():
         rot_y = random.uniform(0, 360)
         rot_z = random.uniform(0, 360)
 
-        add_mesh(object_type, size = object_size)
-        object = bpy.context.object
+        #Check Intersection Here:
+        if not intersecting(x, y, z, scale, object_size, objects):
 
-        object.location = (x,y,z)
-        object.scale = (scale,scale,scale)
-        object.rotation_euler = (rot_x, rot_y, rot_z)
+            add_mesh(object_type, size = object_size)
+            object = bpy.context.object
+
+            object.location = (x, y, z)
+            object.scale = (scale, scale, scale)
+            object.rotation_euler = (rot_x, rot_y, rot_z)
+
+            objects.append((x, y, z, scale))
+
+
+def intersecting(x, y, z, scale, object_size, objects):
+    for object in objects:
+        x_dist = (x - object[0])**2
+        y_dist = (y - object[1])**2
+        z_dist = (z - object[2])**2
+
+        distance = math.sqrt(x_dist + y_dist + z_dist)
+
+        added_object = math.sqrt(3 * (object_size * scale * 0.5) ** 2)
+        existing_object = math.sqrt(3 * (object_size * object[3] * 0.5) ** 2)
+
+        if distance < added_object + existing_object:
+            return True
+    return False
 
 if __name__ == '__main__':
     main()
