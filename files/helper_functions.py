@@ -1,7 +1,16 @@
 import bpy
 import os
 
-os.system('cls' if os.name == 'nt' else 'clear')
+
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+    # if os.name == 'nt':
+    #     command = 'cls'
+    # else:
+    #     command = 'cleer'
+
+    # os.system(command)
 
 
 def add_mesh(type, size=2, location = (0,0,0)):
