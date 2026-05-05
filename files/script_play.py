@@ -1,7 +1,7 @@
 import bpy
 import os
 
-from math import sin, cos, radians
+from math import sin, cos, radians, exp
 from helper_functions import *
 
 
@@ -13,21 +13,23 @@ def main():
     # Object Parameters
     object_size = 1
     object_type = 'Cube'
-    number_of_objects = 300
+    number_of_objects = 800
     x = y = z = 0
 
     # Spiral Parameters
-    spiral_radius = 5
+    spiral_radius = 1
     angle_between_objects = 360 / number_of_objects
-    spiral_height = 20
-    rotation_factor = 10
+    spiral_height = 15
+    rotation_factor = 8
 
     for obj in range(number_of_objects):
         placement_angle = rotation_factor * obj * angle_between_objects
         angle = radians(placement_angle)
 
-        x = cos(angle) * spiral_radius
-        y = sin(angle) * spiral_radius
+        vortex_calculation = exp(obj*.005) * spiral_radius
+
+        x = cos(angle) * vortex_calculation
+        y = sin(angle) * vortex_calculation
 
         add_mesh(object_type, size = object_size, location = (x,y,z))
 
