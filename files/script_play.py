@@ -11,36 +11,31 @@ def main():
     bpy.ops.object.delete(use_global=False)
 
     # Object Parameters
-    object_size = 1.8
+    object_size = 1
     object_type = 'Cube'
-    number_of_objects = 24
+    number_of_objects = 300
     x = y = z = 0
 
-    # Circle Parameters
-    radius = 5
+    # Spiral Parameters
+    spiral_radius = 5
     angle_between_objects = 360 / number_of_objects
+    spiral_height = 20
+    rotation_factor = 10
 
-    number_of_layers = 10
-    distance_between_layers = 2
+    for obj in range(number_of_objects):
+        placement_angle = rotation_factor * obj * angle_between_objects
+        angle = radians(placement_angle)
 
-    for layer in range(number_of_layers):
+        x = cos(angle) * spiral_radius
+        y = sin(angle) * spiral_radius
 
-        for obj in range(number_of_objects):
-            placement_angle = obj * angle_between_objects
-            angle = radians(placement_angle)
+        add_mesh(object_type, size = object_size, location = (x,y,z))
 
-            x = cos(angle) * radius
-            y = sin(angle) * radius
+        rot_angle = radians(-90 - placement_angle)
 
-            add_mesh(object_type, size = object_size, location = (x,y,z))
+        bpy.ops.transform.rotate(value=rot_angle, orient_axis='Z')
 
-            rot_angle = radians(-90 - placement_angle)
-
-            bpy.ops.transform.rotate(value=rot_angle, orient_axis='Z')
-
-            z += distance_between_layers / number_of_objects
-
-#        z += distance_between_layers
+        z += spiral_height / number_of_objects
 
 if __name__ == '__main__':
     main()
