@@ -5,31 +5,8 @@ from helper_functions import *
 
 def main():
     clear_console()
-    # select(types = 'ALL')
-
-    base = 8
-    size = 3
-    tall = 5
-    reset = x = y = z = 0.5 * size
-
-    for height in range(tall):
-        for depth in range(base):
-            for width in range(base):
-                add_mesh('Cube', size = size, location = (x,y,z))
-                x += size
-            y += size
-            x = reset * (height + 1)
-        x = reset * (height + 2)
-        y = reset * (height + 2)
-        z += size
-        base -= 1
-
-    # so = bpy.context.selected_objects
-    # sorted_so = sorted(so, key = lambda obj: obj.name)
-
-    # for i, obj in enumerate(sorted_so):
-    #     print(obj.name)
-    #     sorted_so[i].location.z = i * 2
+    bpy.ops.object.select_all(action='SELECT')
+    bpy.ops.object.delete(use_global=False)
 
 if __name__ == '__main__':
     main()
