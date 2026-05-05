@@ -18,9 +18,11 @@ def main():
                 add_mesh('Cube', size = size, location = (x,y,z))
                 x += size
             y += size
-            x = reset
-        y = reset
+            x = reset * (height + 1)
+        x = reset * (height + 2)
+        y = reset * (height + 2)
         z += size
+        base -= 1
 
     # so = bpy.context.selected_objects
     # sorted_so = sorted(so, key = lambda obj: obj.name)
