@@ -7,13 +7,20 @@ def main():
     clear_console()
     # select(types = 'ALL')
 
-    size = 1
-    base = 6
-    x = y = z = 0.5 * size
+    base = 8
+    size = 3
+    tall = 5
+    reset = x = y = z = 0.5 * size
 
-    for width in range(base):
-        add_mesh('Cube', size = size, location = (x,y,z))
-        x += size
+    for height in range(tall):
+        for depth in range(base):
+            for width in range(base):
+                add_mesh('Cube', size = size, location = (x,y,z))
+                x += size
+            y += size
+            x = reset
+        y = reset
+        z += size
 
     # so = bpy.context.selected_objects
     # sorted_so = sorted(so, key = lambda obj: obj.name)
