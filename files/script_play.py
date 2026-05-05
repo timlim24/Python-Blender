@@ -1,5 +1,7 @@
 import bpy
 import os
+
+from math import sin, cos, radians
 from helper_functions import *
 
 
@@ -10,7 +12,7 @@ def main():
 
     # Object Parameters
     object_size = 1
-    object_type = 'Cube'
+    object_type = 'Monkey'
     number_of_objects = 12
     x = y = z = 0
 
@@ -18,12 +20,17 @@ def main():
     radius = 5
     angle_between_objects = 360 / number_of_objects
 
-    angle = radians(30)
+    for obj in range(number_of_objects):
+        angle = radians(obj * angle_between_objects)
 
-    x = cos(angle) * radius
-    y = sin(angle) * radius
+        x = cos(angle) * radius
+        y = sin(angle) * radius
 
-    add_mesh(object_type, size = object_size, location = (x,y,z))
+        add_mesh(object_type, size = object_size, location = (x,y,z))
+
+        rot_angle = radians(-90 - obj * angle_between_objects)
+
+        bpy.ops.transform.rotate(value=rot_angle, orient_axis='Z')
 
 if __name__ == '__main__':
     main()
