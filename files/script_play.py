@@ -11,10 +11,7 @@ def main():
     z = 5
     so = bpy.context.selected_objects
 
-    def object_name(obj):
-        return obj.name
-
-    sorted_so = sorted(so, key = object_name)
+    sorted_so = sorted(so, key = lambda obj: obj.name)
 
     for i, obj in enumerate(sorted_so):
         print(obj.name)
