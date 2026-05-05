@@ -11,7 +11,7 @@ def main():
     bpy.ops.object.delete(use_global=False)
 
     # Object Parameters
-    object_size = 1
+    object_size = 1.8
     object_type = 'Monkey'
     number_of_objects = 12
     x = y = z = 0
@@ -20,17 +20,25 @@ def main():
     radius = 5
     angle_between_objects = 360 / number_of_objects
 
-    for obj in range(number_of_objects):
-        angle = radians(obj * angle_between_objects)
+    number_of_layers = 10
+    distance_between_objects = 2
 
-        x = cos(angle) * radius
-        y = sin(angle) * radius
+    for layer in range(number_of_layers):
 
-        add_mesh(object_type, size = object_size, location = (x,y,z))
+        for obj in range(number_of_objects):
+            placement_angle = obj * angle_between_objects + layer * 0.5 * angle_between_objects
+            angle = radians(placement_angle)
 
-        rot_angle = radians(-90 - obj * angle_between_objects)
+            x = cos(angle) * radius
+            y = sin(angle) * radius
 
-        bpy.ops.transform.rotate(value=rot_angle, orient_axis='Z')
+            add_mesh(object_type, size = object_size, location = (x,y,z))
+
+            rot_angle = radians(-90 - placement_angle)
+
+            bpy.ops.transform.rotate(value=rot_angle, orient_axis='Z')
+
+        z += distance_between_objects
 
 if __name__ == '__main__':
     main()
